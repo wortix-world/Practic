@@ -13,7 +13,7 @@ const items = [
   },
   { id: "naked", title: "Нейкеды и дорожные", image: "/images/naked.jpg", href: "#" },
   { id: "classic", title: "Классические мотоциклы", image: "/images/classic.jpg", href: "#" },
-  {id: "electronics", title: "Электромотоциклы", image: "/images/electronics.jpg", href: "#" },
+  { id: "electronics", title: "Электромотоциклы", image: "/images/electronics.jpg", href: "#" },
   { id: "scooters", title: "Городские скутеры", image: "/images/scooters.jpg", href: "#" },
 ];
 
