@@ -8,7 +8,7 @@ function Navigation() {
     },
     {
       label: "Мотоциклы",
-      path: "/motorcycles"
+      path: "/products"
     }
   ];
 

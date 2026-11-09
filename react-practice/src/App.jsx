@@ -3,6 +3,7 @@ import HomePage from "./pages/HomePage";
 import SimplePage from "./pages/SimplePage";
 import AdminLayout from "./layouts/AdminLayout";
 import { BrowserRouter, Routes, Route } from "react-router";
+import CatalogPage from "./pages/CatalogPage";
 
 function App() {
   return (
@@ -10,7 +11,7 @@ function App() {
       <Routes>
         <Route element={<Layout/>}>
           <Route index element={<HomePage/>}/>
-          <Route path="products" element={<SimplePage title="Все товары"/>} />
+          <Route path="products" element={<CatalogPage />} />
           <Route
             path="products/:id"
             element={<SimplePage title="Карточка товар"/>}

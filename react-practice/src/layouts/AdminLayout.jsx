@@ -15,7 +15,7 @@ function AdminLayout() {
                 <Outlet />
             </main>
         </div>
-    )
+    )           
 }
 
 export default AdminLayout;
