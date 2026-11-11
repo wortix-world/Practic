@@ -1,45 +1,24 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import CatalogFilters from "../components/Catalog/CatalogFilters";
 import ProductGrid from "../components/Catalog/ProductGrid";
-
-const products = [
-    {
-    id: 1,
-    name: "Спортивный мотоцикл",
-    category: "Спортбайки",
-    price: 899000,
-    image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8XCMAGUYPXPWaqoZ16Xmd__IV1sSNJ4kU6jtptc0nCw&s=10",
-  },
-  {
-    id: 2,
-    name: "Городской мотоцикл",
-    category: "Городские",
-    price: 649000,
-    image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_gxlSQoYFdgmJ8EsxFmEm22UwkEeOtdy6OxPk1VxE_A&s=10",
-  },
-  {
-    id: 3,
-    name: "Спортивный мотоцикл",
-    category: "Спортбайки",
-    price: 1029000,
-    image:"https://synergosmoto.com/uploaded/Sw9suN7Yg1.jpg",
-  },
-  {
-    id: 4,
-    name: "Спортивный мотоцикл",
-    category: "Спортбайки",
-    price: 785000,
-    image:"https://bvdshop.ru/assets/images/products/42127/rejting-enduro-motociklov-3.1739802419.jpg.535x803r.webp",
-  },
-
-];
-
-const categories = [...new Set(products.map((product) => product.category))];
+import { getProducts } from "../api/products";
 
 function CatalogPage() {
+  const [products, setProducts] = useState([]);
   const [category, setCategory] = useState("Все");
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("default");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    getProducts()
+      .then(setProducts)
+      .catch((error) => setError(error.message))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const categories = [...new Set(products.map((product) => product.category))];
 
   const visibleProducts = useMemo(() => {
     const query = search.trim().toLowerCase();
@@ -59,25 +38,37 @@ function CatalogPage() {
     }
 
     return result;
-  }, [category, search, sort]);
+  }, [products, category, search, sort]);
 
   return (
     <section className="mx-auto max-w-6xl px-6 py-10">
-        <h1 className="mb-2 text-3xl font-semibold">Каталог мотоциклов</h1>
-        <p className="mb-8 text-sm text-gray-500">Найдено товаров: {visibleProducts.length}</p>
+      <h1 className="mb-2 text-3xl font-semibold">Каталог мотоциклов</h1>
 
-        <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-[240px_1fr]">
+      {loading ? (
+        <p>Загрузка товаров...</p>
+      ) : error ? (
+        <p>{error}</p>
+      ) : (
+        <>
+          <p className="mb-8 text-sm text-gray-500">
+            Найдено товаров: {visibleProducts.length}
+          </p>
+
+          <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-[240px_1fr]">
             <CatalogFilters
-            categories={categories}
-            category={category}
-            onCategoryChange={setCategory}
-            search={search}
-            onSearchChange={setSearch}
-            sort={sort}
-            onSortChange={setSort}/>
+              categories={categories}
+              category={category}
+              onCategoryChange={setCategory}
+              search={search}
+              onSearchChange={setSearch}
+              sort={sort}
+              onSortChange={setSort}
+            />
 
             <ProductGrid products={visibleProducts} />
-        </div>
+          </div>
+        </>
+      )}
     </section>
   );
 }

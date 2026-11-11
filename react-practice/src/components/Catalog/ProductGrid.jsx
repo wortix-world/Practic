@@ -11,7 +11,7 @@ function ProductGrid({ products }) {
                 <ProductCard
                 key={product.id}
                 name={product.name}
-                price={`${product.price.toLocaleString("ru-RU")} ₽`}
+                price={`${product.price.toLocaleString("ru-RU")} $`}
                 image={product.image}
                 href={`/products/${product.id}`}/>
             ))}
