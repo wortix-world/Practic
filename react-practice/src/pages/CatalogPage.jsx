@@ -13,6 +13,7 @@ function CatalogPage() {
   const [sort, setSort] = useState("default");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   useEffect(() => {
     getProducts()
@@ -66,13 +67,18 @@ function CatalogPage() {
         <p>{error}</p>
       ) : (
         <>
-          <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="sticky top-0 z-30 -mx-4 mb-4 flex items-center justify-between border-b border-gray-200 bg-white/95 px-4 py-3 backdrop-blur sm:-mx-6 sm:px-6 md:static md:mx-0 md:border-0 md:bg-transparent md:px-0 md:py-0 md:backdrop-blur-none">
             <p className="text-sm text-gray-600">
               Найдено товаров:{" "}
-              <span className="font-semibold text-gray-950">
-                {visibleProducts.length}
-              </span>
+              <span className="font-semibold text-gray-950">{visibleProducts.length}</span>
             </p>
+
+            <button type="button"
+              onClick={()=> setFiltersOpen(true)}
+              className="rounded-lg bg-emerald-800 px-4 py-2 text-sm font-medium text-white md:hidden"
+            >
+              Фильтры
+            </button>
           </div>
           <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-[240px_1fr]">
             <CatalogFilters
@@ -85,6 +91,8 @@ function CatalogPage() {
               onCategoryChange={setCategory}
               search={search}
               onSearchChange={setSearch}
+              open={filtersOpen}
+              onClose={() => setFiltersOpen(false)}
             />
 
             <div className="space-y-5">

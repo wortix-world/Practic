@@ -8,10 +8,42 @@ function CatalogFilters({
   onMinPriceChange,
   maxPrice,
   onMaxPriceChange,
+  open, 
+  onClose,
+
 }) {
   return (
-    <aside className="space-y-5 rounded-xl border border-gray-200 bg-white p-5">
-      <div>
+    <>
+    {open && (
+      <button
+      type="button"
+      aria-label="Закрыть фильтры"
+      onClick={onClose}
+      className="fixed inset-0 z-40 bg-black/40 md:hidden"
+      />
+    )}
+
+    <aside
+      className={`
+      space-y-5 bg-white p-5 
+      fixed inset-x-0 bottom-0 z-50 max-h-[85vh] overflow-y-auto
+      rounded-t-2xl border-t border-gray-200 shadow-xl
+      transition-transform duration-300 
+      ${open ? "translate-y-0" : "translate-y-full"}
+      md:static md:z-auto md:max-h-none md:translate-y-0 
+      md:rounded-xl md:border md:shadow-none 
+      md:sticky md:top-4
+      `}
+    >
+      <div className="flex items-center justify-between md:hidden">
+        <h2 className="text-lg font-semibold">Фильтры</h2>
+        <button type="button" onClick={onClose} aria-label="Закрыть" className="text-2xl">
+          x
+        </button>
+      </div>
+
+
+        <div>
         <label
           htmlFor="catalog-search"
           className="mb-2 block text-sm font-medium"
@@ -85,7 +117,13 @@ function CatalogFilters({
           className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm"
         />
       </div>
+
+          <button type="button" onClick={onClose}
+          className="w-full rounded-lg bg-emerald-800 py-2 text-sm font-medium text-white md:hidden">
+            Показать результаты 
+          </button>
     </aside>
+   </>
   );
 }
 
