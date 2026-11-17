@@ -57,8 +57,8 @@ function CatalogPage() {
   }, [products, category, search, minPrice, maxPrice, sort]);
 
   return (
-    <section className="mx-auto max-w-6xl px-6 py-10">
-      <h1 className="mb-2 text-3xl font-semibold">Каталог мотоциклов</h1>
+    <section className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-10">
+      <h1 className="mb-2 text-2xl font-semibold sm:text-3xl">Каталог мотоциклов</h1>
 
       {loading ? (
         <p>Загрузка товаров...</p>

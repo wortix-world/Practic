@@ -18,14 +18,14 @@ function ProductCard({ name, price, image, href }) {
         <p className="mt-2 font-semibold">{price}</p>
          <button
             type="button"
-            className="flex-1 m-3 w-29 mr-4 rounded-lg bg-emerald-900 px-3 py-2 text-sm text-white hover:bg-emerald-800"
+            className="mt-3 w-full rounded-lg bg-emerald-900 px-3 py-2 text-sm text-white hover:bg-emerald-800"
           >
             Подробнее
           </button>
 
           <button
             type="button"
-            className="flex-1 w-29 rounded-lg bg-white px-3 py-2 text-sm text-gray-900 hover:bg-gray-200 border border-gray-300"
+            className="mt-2 w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 hover:bg-gray-200"
           >
              В корзину
           </button>
