@@ -65,13 +65,15 @@ function PopularItems() {
   }, []);
 
   return (
-    <section className="popular-items">
-      <div className="popular-items__inner">
-        <div className="popular-items__header">
-          <h2 className="popular-items__title">Популярные категории</h2>
-          <div className="popular-items__controls">
+    <section className="px-6 py-10">
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-6 flex items-center justify-between gap-4">
+          <h2 className="m-0 text-3xl font-normal max-md:text-2xl">
+            Популярные категории
+          </h2>
+          <div className="flex gap-2">
             <button
-              className="popular-items__arrow"
+              className="grid size-10 cursor-pointer place-items-center rounded-full border border-neutral-200 bg-white text-xl text-inherit hover:bg-neutral-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
               type="button"
               aria-label="Предыдущие категории"
               onClick={() => moveCarousel(-1)}
@@ -79,7 +81,7 @@ function PopularItems() {
               ←
             </button>
             <button
-              className="popular-items__arrow"
+              className="grid size-10 cursor-pointer place-items-center rounded-full border border-neutral-200 bg-white text-xl text-inherit hover:bg-neutral-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
               type="button"
               aria-label="Следующие категории"
               onClick={() => moveCarousel(1)}
@@ -90,7 +92,7 @@ function PopularItems() {
         </div>
 
         <div
-          className="popular-items__viewport"
+          className="snap-x snap-mandatory overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden motion-reduce:scroll-auto"
           ref={viewportRef}
           onMouseEnter={() => {
             isHoveredRef.current = true;
@@ -107,7 +109,7 @@ function PopularItems() {
             }
           }}
         >
-          <div className="popular-items__track" ref={trackRef}>
+          <div className="flex gap-4" ref={trackRef}>
             {items.map((item) => (
               <PopularItem key={item.id} item={item} />
             ))}

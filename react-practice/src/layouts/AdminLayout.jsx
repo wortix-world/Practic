@@ -1,21 +1,24 @@
-import {Link, Outlet} from "react-router";
+import { useState } from "react";
+import AdminHeader from "../components/Admin/AdminHeader";
+import AdminSidebar from "../components/Admin/AdminSedebar";
+import AdminWorkSpace from "../components/Admin/AdminWorkspace";
 
 function AdminLayout() {
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+
     return (
-        <div className="min-h-screen bg-gray-100">
-            <header className="bg-white p-4 shadow">
-                <nav className="flex gap-4">
-                    <Link to="/admin">Админ-панель</Link>
-                    <Link to="/admin/products">Управление товарами</Link>
-                    <Link to="/admin/categories">Категории</Link>
-                </nav>
-            </header>
-            
-            <main className="p-6">
-                <Outlet />
-            </main>
+        <div className="flex min-h-screen bg-gray-100 text-gray-950">
+            <AdminSidebar
+                open={sidebarOpen}
+                onClose={() => setSidebarOpen(false)}
+            />
+
+            <div className="flex-min-w-0 flex-1 flex-col">
+                <AdminHeader onMenuClick={()=> setSidebarOpen(true)} />
+                    <AdminWorkSpace/>
+            </div>
         </div>
-    )           
+    );
 }
 
 export default AdminLayout;

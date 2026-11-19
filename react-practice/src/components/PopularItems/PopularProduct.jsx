@@ -12,7 +12,7 @@ function PopularProducts() {
     return (
         <section className="px-6 py-12">
             <div
-                className="mx-auto max-w-7xl">
+                className="mx-auto max-w-6xl">
                     <h2 className="mb-6 text-3xl font-semibold">
                         Популярные товары
                     </h2>
